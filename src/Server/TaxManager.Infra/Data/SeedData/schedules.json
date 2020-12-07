@@ -1,0 +1,20 @@
+[
+  {
+    "MunicipalityId": 1,
+    "StartDate": "2020-01-01",
+    "EndDate": "2020-12-31",
+    "TaxType": 3
+  },
+  {
+    "MunicipalityId": 1,
+    "StartDate": "2020-05-01",
+    "EndDate": "2020-05-31",
+    "TaxType": 2
+  },
+  {
+    "MunicipalityId": 1,
+    "StartDate": "2020-01-01",
+    "EndDate": "2020-01-01",
+    "TaxType": 0
+  }
+]

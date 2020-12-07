@@ -13,4 +13,8 @@
       <ProjectReference Include="..\TaxManager.Core\TaxManager.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Data\Migrations" />
+    </ItemGroup>
+
 </Project>

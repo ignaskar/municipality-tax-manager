@@ -33,6 +33,10 @@
             <e p="bin" t="ExcludeRecursive" />
             <e p="Entities" t="Include">
               <e p="Municipality.cs" t="Include" />
+              <e p="TaxSchedule.cs" t="Include" />
+            </e>
+            <e p="Enums" t="Include">
+              <e p="TaxType.cs" t="Include" />
             </e>
             <e p="obj" t="ExcludeRecursive">
               <e p="Debug" t="Include">
@@ -47,11 +51,16 @@
             <e p="bin" t="ExcludeRecursive" />
             <e p="Data" t="Include">
               <e p="Migrations" t="Include">
-                <e p="20201207100322_InitialMigration.cs" t="Include" />
-                <e p="20201207100322_InitialMigration.Designer.cs" t="Include" />
+                <e p="20201207113308_TaxScheduleFix.cs" t="Include" />
+                <e p="20201207113308_TaxScheduleFix.Designer.cs" t="Include" />
                 <e p="TaxManagerContextModelSnapshot.cs" t="Include" />
               </e>
+              <e p="SeedData" t="Include">
+                <e p="municipalities.json" t="Include" />
+                <e p="schedules.json" t="Include" />
+              </e>
               <e p="TaxManagerContext.cs" t="Include" />
+              <e p="TaxManagerContextSeed.cs" t="Include" />
             </e>
             <e p="obj" t="ExcludeRecursive">
               <e p="Debug" t="Include">

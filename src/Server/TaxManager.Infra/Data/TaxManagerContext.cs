@@ -12,5 +12,6 @@ namespace TaxManager.Infra.Data
         }
 
         public DbSet<Municipality> Municipalities { get; set; }
+        public DbSet<TaxSchedule> Schedules { get; set; }
     }
 }

@@ -45,6 +45,48 @@ namespace TaxManager.Infra.Data.Migrations
 
                     b.ToTable("Municipalities");
                 });
+
+            modelBuilder.Entity("TaxManager.Core.Entities.TaxSchedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MunicipalityId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("TaxType")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MunicipalityId");
+
+                    b.ToTable("Schedules");
+                });
+
+            modelBuilder.Entity("TaxManager.Core.Entities.TaxSchedule", b =>
+                {
+                    b.HasOne("TaxManager.Core.Entities.Municipality", "Municipality")
+                        .WithMany("TaxSchedules")
+                        .HasForeignKey("MunicipalityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Municipality");
+                });
+
+            modelBuilder.Entity("TaxManager.Core.Entities.Municipality", b =>
+                {
+                    b.Navigation("TaxSchedules");
+                });
 #pragma warning restore 612, 618
         }
     }

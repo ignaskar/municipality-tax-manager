@@ -10,8 +10,8 @@ using TaxManager.Infra.Data;
 namespace TaxManager.Infra.Data.Migrations
 {
     [DbContext(typeof(TaxManagerContext))]
-    [Migration("20201207100322_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20201207113308_TaxScheduleFix")]
+    partial class TaxScheduleFix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,6 +46,48 @@ namespace TaxManager.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Municipalities");
+                });
+
+            modelBuilder.Entity("TaxManager.Core.Entities.TaxSchedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MunicipalityId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("TaxType")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MunicipalityId");
+
+                    b.ToTable("Schedules");
+                });
+
+            modelBuilder.Entity("TaxManager.Core.Entities.TaxSchedule", b =>
+                {
+                    b.HasOne("TaxManager.Core.Entities.Municipality", "Municipality")
+                        .WithMany("TaxSchedules")
+                        .HasForeignKey("MunicipalityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Municipality");
+                });
+
+            modelBuilder.Entity("TaxManager.Core.Entities.Municipality", b =>
+                {
+                    b.Navigation("TaxSchedules");
                 });
 #pragma warning restore 612, 618
         }

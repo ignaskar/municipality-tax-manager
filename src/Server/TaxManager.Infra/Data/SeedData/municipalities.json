@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Vilnius",
+    "YearlyTaxRate": 0.2,
+    "MonthlyTaxRate": 0.4,
+    "DailyTaxRate": 0.1
+  },
+  {
+    "Name": "Kaunas",
+    "YearlyTaxRate": 0.2,
+    "MonthlyTaxRate": 0.5,
+    "WeeklyTaxRate": 0.3,
+    "DailyTaxRate": 0.2
+  }
+]

@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{24DED19F-8019-454E-A0E0-3CEBF08758D2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{E6624B34-D156-4330-A4E0-A322F2199E76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxManager.API", "src\Server\TaxManager.API\TaxManager.API.csproj", "{3ED12848-7B39-4459-8708-E1D8EEEF4332}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxManager.Core", "src\Server\TaxManager.Core\TaxManager.Core.csproj", "{EDED4A03-5475-4C19-AD31-6AAF56963F8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxManager.Infra", "src\Server\TaxManager.Infra\TaxManager.Infra.csproj", "{18C3C2A8-03B4-4D8D-89D0-B4ECD1715027}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E6624B34-D156-4330-A4E0-A322F2199E76} = {24DED19F-8019-454E-A0E0-3CEBF08758D2}
+		{3ED12848-7B39-4459-8708-E1D8EEEF4332} = {E6624B34-D156-4330-A4E0-A322F2199E76}
+		{EDED4A03-5475-4C19-AD31-6AAF56963F8F} = {E6624B34-D156-4330-A4E0-A322F2199E76}
+		{18C3C2A8-03B4-4D8D-89D0-B4ECD1715027} = {E6624B34-D156-4330-A4E0-A322F2199E76}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3ED12848-7B39-4459-8708-E1D8EEEF4332}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ED12848-7B39-4459-8708-E1D8EEEF4332}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ED12848-7B39-4459-8708-E1D8EEEF4332}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ED12848-7B39-4459-8708-E1D8EEEF4332}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDED4A03-5475-4C19-AD31-6AAF56963F8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDED4A03-5475-4C19-AD31-6AAF56963F8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDED4A03-5475-4C19-AD31-6AAF56963F8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDED4A03-5475-4C19-AD31-6AAF56963F8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18C3C2A8-03B4-4D8D-89D0-B4ECD1715027}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18C3C2A8-03B4-4D8D-89D0-B4ECD1715027}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18C3C2A8-03B4-4D8D-89D0-B4ECD1715027}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18C3C2A8-03B4-4D8D-89D0-B4ECD1715027}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

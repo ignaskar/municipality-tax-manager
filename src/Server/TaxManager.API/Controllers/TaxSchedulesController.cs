@@ -31,7 +31,7 @@ namespace TaxManager.API.Controllers
         [ProducesResponseType(typeof(TaxScheduleDto), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IReadOnlyList<TaxScheduleDto>>> GetTaxSchedulesForMunicipality(string name)
         {
-            var municipalitySpec = new MunicipalityWithoutTaxSchedulesSpecification(name);
+            var municipalitySpec = new MunicipalitiesWithTaxSchedulesSpecification(name);
 
             var municipality = await _uow.Repository<Municipality>().GetEntityWithSpecification(municipalitySpec);
 
@@ -39,12 +39,8 @@ namespace TaxManager.API.Controllers
             {
                 return NotFound();
             }
-            
-            var spec = new TaxSchedulesForMunicipalitySpecification(municipality.Id);
-            
-            var taxSchedules = await _uow.Repository<TaxSchedule>().ListAsync(spec);
 
-            return Ok(_mapper.Map<IReadOnlyList<TaxScheduleDto>>(taxSchedules));
+            return Ok(_mapper.Map<IReadOnlyList<TaxScheduleDto>>(municipality.TaxSchedules));
         }
 
         [HttpGet("{date}")]
@@ -52,7 +48,7 @@ namespace TaxManager.API.Controllers
         [ProducesResponseType(typeof(TaxScheduleDto), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<double>> GetTaxRateByDate(string name, DateTime date)
         {
-            var municipalitySpec = new MunicipalityWithoutTaxSchedulesSpecification(name);
+            var municipalitySpec = new MunicipalitiesWithTaxSchedulesSpecification(name);
             
             var municipality = await _uow.Repository<Municipality>().GetEntityWithSpecification(municipalitySpec);
 
@@ -60,16 +56,12 @@ namespace TaxManager.API.Controllers
             {
                 return NotFound();
             }
-            
-            var spec = new TaxSchedulesForMunicipalitySpecification(municipality.Id);
-            
-            var taxSchedules = await _uow.Repository<TaxSchedule>().ListAsync(spec);
 
             var containsDailyRate = false;
             var containsWeeklyRate = false; 
             var containsMonthlyRate = false;
             
-            foreach (var taxSchedule in taxSchedules)
+            foreach (var taxSchedule in municipality.TaxSchedules)
             {
                 if (date.InRange(taxSchedule.StartDate, taxSchedule.EndDate) && taxSchedule.TaxType == TaxType.Daily)
                 {

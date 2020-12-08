@@ -28,7 +28,7 @@ namespace TaxManager.API.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(MunicipalityDto), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(TaxScheduleDto), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IReadOnlyList<TaxScheduleDto>>> GetTaxSchedulesForMunicipality(string name)
         {
             var municipalitySpec = new MunicipalityWithoutTaxSchedulesSpecification(name);
@@ -49,7 +49,7 @@ namespace TaxManager.API.Controllers
 
         [HttpGet("{date}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(MunicipalityDto), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(TaxScheduleDto), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<double>> GetTaxRateByDate(string name, DateTime date)
         {
             var municipalitySpec = new MunicipalityWithoutTaxSchedulesSpecification(name);

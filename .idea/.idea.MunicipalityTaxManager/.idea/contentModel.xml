@@ -14,13 +14,24 @@
             <e p="appsettings.Development.json" t="Include" />
             <e p="appsettings.json" t="Include" />
             <e p="bin" t="ExcludeRecursive" />
-            <e p="Controllers" t="Include" />
+            <e p="Controllers" t="Include">
+              <e p="MunicipalitiesController.cs" t="Include" />
+              <e p="ScheduleController.cs" t="Include" />
+            </e>
+            <e p="Dtos" t="Include">
+              <e p="MunicipalityDto.cs" t="Include" />
+              <e p="TaxScheduleDto.cs" t="Include" />
+            </e>
             <e p="obj" t="ExcludeRecursive">
               <e p="Debug" t="Include">
                 <e p="net5.0" t="Include">
                   <e p="TaxManager.API.AssemblyInfo.cs" t="Include" />
                 </e>
               </e>
+            </e>
+            <e p="Profiles" t="Include">
+              <e p="MunicipalityProfile.cs" t="Include" />
+              <e p="TaxScheduleProfile.cs" t="Include" />
             </e>
             <e p="Program.cs" t="Include" />
             <e p="Properties" t="Include">
@@ -38,6 +49,11 @@
             <e p="Enums" t="Include">
               <e p="TaxType.cs" t="Include" />
             </e>
+            <e p="Interfaces" t="Include">
+              <e p="IGenericRepository.cs" t="Include" />
+              <e p="ISpecification.cs" t="Include" />
+              <e p="IUnitOfWork.cs" t="Include" />
+            </e>
             <e p="obj" t="ExcludeRecursive">
               <e p="Debug" t="Include">
                 <e p="net5.0" t="Include">
@@ -45,11 +61,17 @@
                 </e>
               </e>
             </e>
+            <e p="Specifications" t="Include">
+              <e p="BaseSpecification.cs" t="Include" />
+              <e p="MunicipalitiesWithTaxSchedulesSpecification.cs" t="Include" />
+              <e p="MunicipalitySpecParams.cs" t="Include" />
+            </e>
             <e p="TaxManager.Core.csproj" t="IncludeRecursive" />
           </e>
           <e p="TaxManager.Infra" t="IncludeRecursive">
             <e p="bin" t="ExcludeRecursive" />
             <e p="Data" t="Include">
+              <e p="GenericRepository.cs" t="Include" />
               <e p="Migrations" t="Include">
                 <e p="20201207113308_TaxScheduleFix.cs" t="Include" />
                 <e p="20201207113308_TaxScheduleFix.Designer.cs" t="Include" />
@@ -59,8 +81,10 @@
                 <e p="municipalities.json" t="Include" />
                 <e p="schedules.json" t="Include" />
               </e>
+              <e p="SpecificationEvaluator.cs" t="Include" />
               <e p="TaxManagerContext.cs" t="Include" />
               <e p="TaxManagerContextSeed.cs" t="Include" />
+              <e p="UnitOfWork.cs" t="Include" />
             </e>
             <e p="obj" t="ExcludeRecursive">
               <e p="Debug" t="Include">

@@ -4,7 +4,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using TaxManager.API.Dtos;
+using TaxManager.API.Helpers;
 using TaxManager.Core.Entities;
+using TaxManager.Core.Enums;
 using TaxManager.Core.Interfaces;
 using TaxManager.Core.Specifications;
 
@@ -37,7 +39,9 @@ namespace TaxManager.API.Controllers
         [HttpGet("{id}", Name = "GetById")]
         public async Task<ActionResult<MunicipalityDto>> GetMunicipalityById(int id)
         {
-            var municipality = await _uow.Repository<Municipality>().GetEntityById(id);
+            var spec = new MunicipalitiesWithTaxSchedulesSpecification(id);
+            
+            var municipality = await _uow.Repository<Municipality>().GetEntityWithSpecification(spec);
 
             if (municipality == null)
             {

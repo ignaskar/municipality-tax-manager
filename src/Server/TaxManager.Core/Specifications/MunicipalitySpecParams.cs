@@ -5,7 +5,8 @@ namespace TaxManager.Core.Specifications
 {
     public class MunicipalitySpecParams
     {
+        public string? MunicipalityName { get; set; }
         public double? WeeklyTaxRate { get; set; }
-        public ICollection<TaxSchedule> Schedules { get; set; }
+        public ICollection<TaxSchedule> TaxSchedules { get; set; }
     }
 }

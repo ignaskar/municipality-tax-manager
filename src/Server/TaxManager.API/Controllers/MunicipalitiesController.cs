@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TaxManager.API.Dtos;
 using TaxManager.API.Helpers;
@@ -37,6 +38,8 @@ namespace TaxManager.API.Controllers
         }
 
         [HttpGet("{id}", Name = "GetById")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(MunicipalityDto), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<MunicipalityDto>> GetMunicipalityById(int id)
         {
             var spec = new MunicipalitiesWithTaxSchedulesSpecification(id);

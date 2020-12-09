@@ -20,6 +20,7 @@
             </e>
             <e p="Dtos" t="Include">
               <e p="MunicipalityDto.cs" t="Include" />
+              <e p="MunicipalityForCreationDto.cs" t="Include" />
               <e p="TaxScheduleDto.cs" t="Include" />
             </e>
             <e p="Helpers" t="Include">
@@ -75,6 +76,10 @@
           <e p="TaxManager.Infra" t="IncludeRecursive">
             <e p="bin" t="ExcludeRecursive" />
             <e p="Data" t="Include">
+              <e p="Config" t="Include">
+                <e p="MunicipalityConfiguration.cs" t="Include" />
+                <e p="TaxScheduleConfiguration.cs" t="Include" />
+              </e>
               <e p="GenericRepository.cs" t="Include" />
               <e p="Migrations" t="Include">
                 <e p="20201207113308_TaxScheduleFix.cs" t="Include" />
@@ -85,6 +90,8 @@
                 <e p="20201208105216_TimeSpanTest1.Designer.cs" t="Include" />
                 <e p="20201208111843_TimeSpanTest2.cs" t="Include" />
                 <e p="20201208111843_TimeSpanTest2.Designer.cs" t="Include" />
+                <e p="20201209165242_ModelBuilderConfigurations.cs" t="Include" />
+                <e p="20201209165242_ModelBuilderConfigurations.Designer.cs" t="Include" />
                 <e p="TaxManagerContextModelSnapshot.cs" t="Include" />
               </e>
               <e p="SeedData" t="Include">

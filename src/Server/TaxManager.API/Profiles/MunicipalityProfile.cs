@@ -10,6 +10,8 @@ namespace TaxManager.API.Profiles
         {
             CreateMap<Municipality, MunicipalityDto>();
             CreateMap<MunicipalityDto, Municipality>();
+            CreateMap<MunicipalityForCreationDto, Municipality>();
+            CreateMap<Municipality, MunicipalityForCreationDto>();
         }
     }
 }

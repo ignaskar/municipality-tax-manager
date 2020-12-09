@@ -53,5 +53,19 @@ namespace TaxManager.API.Controllers
             
             return Ok(_mapper.Map<MunicipalityDto>(municipality));
         }
+
+        [HttpPost]
+        [ProducesResponseType(typeof(MunicipalityDto), StatusCodes.Status201Created)]
+        public async Task<ActionResult<MunicipalityDto>> CreateMunicipality(MunicipalityForCreationDto municipalityToCreate)
+        {
+            var municipalityEntity = _mapper.Map<Municipality>(municipalityToCreate);
+            
+            _uow.Repository<Municipality>().Add(municipalityEntity);
+            await _uow.Complete();
+            _uow.Dispose();
+
+            var municipalityToReturn = _mapper.Map<MunicipalityDto>(municipalityEntity);
+            return CreatedAtRoute("GetById", new {id = municipalityToReturn.Id}, municipalityToReturn);
+        }
     }
 }

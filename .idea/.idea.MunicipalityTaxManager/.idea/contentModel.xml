@@ -24,6 +24,7 @@
             </e>
             <e p="Helpers" t="Include">
               <e p="DateRange.cs" t="Include" />
+              <e p="TaxRateClarification.cs" t="Include" />
             </e>
             <e p="obj" t="ExcludeRecursive">
               <e p="Debug" t="Include">
@@ -68,9 +69,6 @@
               <e p="BaseSpecification.cs" t="Include" />
               <e p="MunicipalitiesWithTaxSchedulesSpecification.cs" t="Include" />
               <e p="MunicipalitySpecParams.cs" t="Include" />
-              <e p="MunicipalityWithoutTaxSchedulesSpecification.cs" t="Include" />
-              <e p="TaxSchedulesForMunicipalitySpecification.cs" t="Include" />
-              <e p="TaxScheduleSpecParams.cs" t="Include" />
             </e>
             <e p="TaxManager.Core.csproj" t="IncludeRecursive" />
           </e>

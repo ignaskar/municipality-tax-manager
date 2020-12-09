@@ -57,32 +57,7 @@ namespace TaxManager.API.Controllers
                 return NotFound();
             }
 
-            var containsDailyRate = false;
-            var containsWeeklyRate = false; 
-            var containsMonthlyRate = false;
-            
-            foreach (var taxSchedule in municipality.TaxSchedules)
-            {
-                if (date.InRange(taxSchedule.StartDate, taxSchedule.EndDate) && taxSchedule.TaxType == TaxType.Daily)
-                {
-                    containsDailyRate = true;
-                }
-
-                if (date.InRange(taxSchedule.StartDate, taxSchedule.EndDate) && taxSchedule.TaxType == TaxType.Weekly)
-                {
-                    containsWeeklyRate = true;
-                }
-
-                if (date.InRange(taxSchedule.StartDate, taxSchedule.EndDate) && taxSchedule.TaxType == TaxType.Monthly)
-                {
-                    containsMonthlyRate = true;
-                }
-            }
-
-            return containsDailyRate ? Ok(municipality.DailyTaxRate) :
-                containsWeeklyRate ? Ok(municipality.WeeklyTaxRate) :
-                !containsMonthlyRate ? Ok(municipality.YearlyTaxRate) :
-                Ok(municipality.MonthlyTaxRate);
+            return Ok(municipality.GetTaxRateForDate(municipality.TaxSchedules, date));
         }
     }
 }

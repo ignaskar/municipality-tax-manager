@@ -1,6 +1,6 @@
 using System;
 
-namespace TaxManager.API.Dtos
+namespace TaxManager.API.Dtos.TaxSchedule
 {
     public class TaxScheduleDto
     {

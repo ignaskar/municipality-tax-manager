@@ -19,9 +19,14 @@
               <e p="TaxSchedulesController.cs" t="Include" />
             </e>
             <e p="Dtos" t="Include">
-              <e p="MunicipalityDto.cs" t="Include" />
-              <e p="MunicipalityForCreationDto.cs" t="Include" />
-              <e p="TaxScheduleDto.cs" t="Include" />
+              <e p="Municipality" t="Include">
+                <e p="MunicipalityDto.cs" t="Include" />
+                <e p="MunicipalityForCreationDto.cs" t="Include" />
+              </e>
+              <e p="TaxSchedule" t="Include">
+                <e p="TaxScheduleDto.cs" t="Include" />
+                <e p="TaxScheduleForCreationDto.cs" t="Include" />
+              </e>
             </e>
             <e p="Helpers" t="Include">
               <e p="DateRange.cs" t="Include" />
@@ -70,6 +75,8 @@
               <e p="BaseSpecification.cs" t="Include" />
               <e p="MunicipalitiesWithTaxSchedulesSpecification.cs" t="Include" />
               <e p="MunicipalitySpecParams.cs" t="Include" />
+              <e p="TaxSchedulesForMunicipalitySpecification.cs" t="Include" />
+              <e p="TaxSchedulesWithMunicipalityIdSpecification.cs" t="Include" />
             </e>
             <e p="TaxManager.Core.csproj" t="IncludeRecursive" />
           </e>

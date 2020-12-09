@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using TaxManager.API.Dtos.TaxSchedule;
 
-namespace TaxManager.API.Dtos
+namespace TaxManager.API.Dtos.Municipality
 {
     public class MunicipalityDto
     {

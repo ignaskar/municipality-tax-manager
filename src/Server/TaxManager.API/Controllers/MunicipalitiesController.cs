@@ -5,6 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TaxManager.API.Dtos;
+using TaxManager.API.Dtos.Municipality;
 using TaxManager.API.Helpers;
 using TaxManager.Core.Entities;
 using TaxManager.Core.Enums;

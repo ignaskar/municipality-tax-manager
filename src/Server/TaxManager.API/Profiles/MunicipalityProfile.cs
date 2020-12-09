@@ -1,5 +1,6 @@
 using AutoMapper;
 using TaxManager.API.Dtos;
+using TaxManager.API.Dtos.Municipality;
 using TaxManager.Core.Entities;
 
 namespace TaxManager.API.Profiles
@@ -11,7 +12,6 @@ namespace TaxManager.API.Profiles
             CreateMap<Municipality, MunicipalityDto>();
             CreateMap<MunicipalityDto, Municipality>();
             CreateMap<MunicipalityForCreationDto, Municipality>();
-            CreateMap<Municipality, MunicipalityForCreationDto>();
         }
     }
 }

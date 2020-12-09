@@ -1,5 +1,6 @@
 using AutoMapper;
 using TaxManager.API.Dtos;
+using TaxManager.API.Dtos.TaxSchedule;
 using TaxManager.Core.Entities;
 
 namespace TaxManager.API.Profiles
@@ -10,6 +11,7 @@ namespace TaxManager.API.Profiles
         {
             CreateMap<TaxSchedule, TaxScheduleDto>();
             CreateMap<TaxScheduleDto, TaxSchedule>();
+            CreateMap<TaxScheduleForCreationDto, TaxSchedule>();
         }
     }
 }

@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using TaxManager.API.Dtos.TaxSchedule;
 
-namespace TaxManager.API.Dtos
+namespace TaxManager.API.Dtos.Municipality
 {
     public class MunicipalityForCreationDto
     {

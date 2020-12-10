@@ -4,11 +4,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TaxManager.API.Dtos;
 using TaxManager.API.Dtos.Municipality;
-using TaxManager.API.Helpers;
+using TaxManager.API.Errors;
 using TaxManager.Core.Entities;
-using TaxManager.Core.Enums;
 using TaxManager.Core.Interfaces;
 using TaxManager.Core.Specifications;
 
@@ -49,7 +47,7 @@ namespace TaxManager.API.Controllers
 
             if (municipality == null)
             {
-                return NotFound();
+                return NotFound(new ApiResponse(404));
             }
             
             return Ok(_mapper.Map<MunicipalityDto>(municipality));

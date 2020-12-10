@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TaxManager.API.Dtos.Municipality;
 using TaxManager.API.Dtos.TaxSchedule;
+using TaxManager.API.Errors;
 using TaxManager.API.Helpers;
 using TaxManager.Core.Entities;
-using TaxManager.Core.Enums;
 using TaxManager.Core.Interfaces;
 using TaxManager.Core.Specifications;
 
@@ -38,7 +38,7 @@ namespace TaxManager.API.Controllers
 
             if (municipality == null)
             {
-                return NotFound();
+                return NotFound(new ApiResponse(404));
             }
 
             return Ok(_mapper.Map<IReadOnlyList<TaxScheduleDto>>(municipality.TaxSchedules));
@@ -56,7 +56,7 @@ namespace TaxManager.API.Controllers
 
             if (municipality == null)
             {
-                return NotFound();
+                return NotFound(new ApiResponse(404));
             }
 
             var taxScheduleSpec = new TaxSchedulesForMunicipalitySpecification(taxScheduleId);
@@ -65,7 +65,7 @@ namespace TaxManager.API.Controllers
 
             if (taxSchedule == null)
             {
-                return NotFound();
+                return NotFound(new ApiResponse(404));
             }
 
             return Ok(_mapper.Map<TaxScheduleDto>(taxSchedule));
@@ -82,7 +82,7 @@ namespace TaxManager.API.Controllers
 
             if (municipality == null)
             {
-                return NotFound();
+                return NotFound(new ApiResponse(404));
             }
 
             return Ok(municipality.GetTaxRateForDate(municipality.TaxSchedules, date));
@@ -99,7 +99,7 @@ namespace TaxManager.API.Controllers
 
             if (municipality == null)
             {
-                return NotFound();
+                return NotFound(new ApiResponse(404));
             }
             
             var taxScheduleEntity = _mapper.Map<TaxSchedule>(taxScheduleForCreation);
@@ -107,7 +107,6 @@ namespace TaxManager.API.Controllers
 
             _uow.Repository<TaxSchedule>().Add(taxScheduleEntity);
             await _uow.Complete();
-            _uow.Dispose();
 
             var taxScheduleToReturn = _mapper.Map<TaxScheduleDto>(taxScheduleEntity);
             return CreatedAtRoute("GetTaxScheduleById",

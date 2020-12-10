@@ -15,6 +15,8 @@
             <e p="appsettings.json" t="Include" />
             <e p="bin" t="ExcludeRecursive" />
             <e p="Controllers" t="Include">
+              <e p="BuggyController.cs" t="Include" />
+              <e p="ErrorController.cs" t="Include" />
               <e p="MunicipalitiesController.cs" t="Include" />
               <e p="TaxSchedulesController.cs" t="Include" />
             </e>
@@ -28,9 +30,17 @@
                 <e p="TaxScheduleForCreationDto.cs" t="Include" />
               </e>
             </e>
+            <e p="Errors" t="Include">
+              <e p="ApiException.cs" t="Include" />
+              <e p="ApiResponse.cs" t="Include" />
+              <e p="ApiValidationErrorResponse.cs" t="Include" />
+            </e>
             <e p="Helpers" t="Include">
               <e p="DateRange.cs" t="Include" />
               <e p="TaxRateClarification.cs" t="Include" />
+            </e>
+            <e p="Middleware" t="Include">
+              <e p="ExceptionMiddleware.cs" t="Include" />
             </e>
             <e p="obj" t="ExcludeRecursive">
               <e p="Debug" t="Include">
@@ -76,7 +86,6 @@
               <e p="MunicipalitiesWithTaxSchedulesSpecification.cs" t="Include" />
               <e p="MunicipalitySpecParams.cs" t="Include" />
               <e p="TaxSchedulesForMunicipalitySpecification.cs" t="Include" />
-              <e p="TaxSchedulesWithMunicipalityIdSpecification.cs" t="Include" />
             </e>
             <e p="TaxManager.Core.csproj" t="IncludeRecursive" />
           </e>

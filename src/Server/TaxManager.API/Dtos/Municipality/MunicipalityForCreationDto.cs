@@ -24,6 +24,6 @@ namespace TaxManager.API.Dtos.Municipality
         [Required]
         [Range(0.1, double.MaxValue, ErrorMessage = "Please provide a value greater than or equal to 0.1")]
         public double DailyTaxRate { get; set; }
-        public ICollection<TaxScheduleDto> TaxSchedules { get; set; } = new List<TaxScheduleDto>();
+        public ICollection<TaxScheduleForCreationDto> TaxSchedules { get; set; } = new List<TaxScheduleForCreationDto>();
 }
 }

@@ -4,11 +4,13 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using TaxManager.API.Dtos.Municipality;
 using TaxManager.API.Errors;
 using TaxManager.Core.Entities;
 using TaxManager.Core.Interfaces;
 using TaxManager.Core.Specifications;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace TaxManager.API.Controllers
 {
@@ -18,11 +20,13 @@ namespace TaxManager.API.Controllers
     {
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
+        private readonly ILogger<MunicipalitiesController> _logger;
 
-        public MunicipalitiesController(IUnitOfWork uow, IMapper mapper)
+        public MunicipalitiesController(IUnitOfWork uow, IMapper mapper, ILogger<MunicipalitiesController> logger)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _logger = logger;
         }
 
         [HttpGet]
@@ -66,5 +70,35 @@ namespace TaxManager.API.Controllers
             var municipalityToReturn = _mapper.Map<MunicipalityDto>(municipalityEntity);
             return CreatedAtRoute("GetById", new {id = municipalityToReturn.Id}, municipalityToReturn);
         }
+
+        [HttpPost("upload", Name = "UploadMunicipalities")]
+        public async Task<ActionResult> CreateMunicipalitiesFromJson(UploadFile file)
+        {
+            var municipalitiesToAdd = DeserializeUploadedFile(file.FileContent);
+            
+            foreach (var municipality in municipalitiesToAdd)
+            {
+                var municipalityEntity = _mapper.Map<Municipality>(municipality);
+                _uow.Repository<Municipality>().Add(municipalityEntity);
+
+                try
+                {
+                    await _uow.Complete();
+                }
+                catch (Exception ex)
+                {
+                    return new ObjectResult(new ApiResponse(400,
+                        "Incorrectly formatted JSON file. Please verify the formatting before uploading and try again."));
+                }
+            }
+
+            return Ok(new ApiResponse(201, $"Successfully created {municipalitiesToAdd.Count} entries"));
+        }
+
+        private static IReadOnlyList<MunicipalityForCreationDto> DeserializeUploadedFile(byte[] buffer)
+        {
+            return JsonSerializer.Deserialize<IReadOnlyList<MunicipalityForCreationDto>>(System.Text.Encoding.UTF8.GetString(buffer));
+        }
+
     }
 }

@@ -1,0 +1,22 @@
+[
+  {
+    "Name": "Siauliai",
+    "YearlyTaxRate": 0.3,
+    "MonthlyTaxRate": 0.5,
+    "DailyTaxRate": 0.2,
+    "TaxSchedules": [
+      {
+        "StartDate": "2020-01-01",
+        "EndDate": "2021-01-01",
+        "TaxType": "Yearly"
+      }
+    ]
+  },
+  {
+    "Name": "Panevezys",
+    "YearlyTaxRate": 1.7,
+    "MonthlyTaxRate": 1.5,
+    "WeeklyTaxRate": 1.3,
+    "DailyTaxRate": 1.2
+  }
+]

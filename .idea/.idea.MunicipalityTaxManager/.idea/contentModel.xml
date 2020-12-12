@@ -19,8 +19,10 @@
               <e p="ShowMunicipalityTaxSchedule.razor" t="Include" />
             </e>
             <e p="Models" t="Include">
+              <e p="ApiResponseDisplayModel.cs" t="Include" />
               <e p="MunicipalityDisplayModel.cs" t="Include" />
               <e p="TaxScheduleDisplayModel.cs" t="Include" />
+              <e p="UploadFileModel.cs" t="Include" />
             </e>
             <e p="obj" t="ExcludeRecursive">
               <e p="Debug" t="Include">
@@ -32,6 +34,7 @@
             <e p="Pages" t="Include">
               <e p="FetchMunicipalities.razor" t="Include" />
               <e p="Index.razor" t="Include" />
+              <e p="UploadMunicipalities.razor" t="Include" />
             </e>
             <e p="Program.cs" t="Include" />
             <e p="Properties" t="Include">
@@ -134,6 +137,7 @@
             <e p="Entities" t="Include">
               <e p="Municipality.cs" t="Include" />
               <e p="TaxSchedule.cs" t="Include" />
+              <e p="UploadFile.cs" t="Include" />
             </e>
             <e p="Enums" t="Include">
               <e p="TaxType.cs" t="Include" />
@@ -182,6 +186,7 @@
               <e p="SeedData" t="Include">
                 <e p="municipalities.json" t="Include" />
                 <e p="schedules.json" t="Include" />
+                <e p="upload.json" t="Include" />
               </e>
               <e p="SpecificationEvaluator.cs" t="Include" />
               <e p="TaxManagerContext.cs" t="Include" />

@@ -1,0 +1,76 @@
+@page "/UploadMunicipalities"
+@using System.IO
+@using System.Net
+@inject HttpClient Http
+<h3>Upload Municipalities</h3>
+
+<div class="row">
+    <div class="col-md-6">
+        <h5>Upload JSON formatted Municipality data</h5>
+
+    <form @onsubmit="@OnSubmit">
+        <InputFile OnChange="@OnInputFileChange"></InputFile>
+        <br/>
+
+        <p>Status: @Status</p>
+        <button class="btn btn-primary" disabled="@isSubmitDisabled" type="submit">Upload</button>
+    </form>
+    </div>
+
+    <div class="col-md-6">
+        <h5>API Response:</h5>
+        <table class="table table-borderless">
+            <thead class="thead-light">
+            <tr>
+                <th>StatusCode</th>
+                <th>Message</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>@content.StatusCode</th>
+                <th>@content.Message</th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@code {
+    public string Status => isSubmitDisabled ? "Please submit a file with .json extension." : "Can upload";
+    
+    private IBrowserFile jsonFile;
+    private bool isSubmitDisabled = true;
+    private ApiResponseDisplayModel content = new ApiResponseDisplayModel();
+
+    private void OnInputFileChange(InputFileChangeEventArgs e)
+    {
+        if (e.File.ContentType != "application/json")
+        {
+            isSubmitDisabled = true;
+            return;
+        }
+        content = new ApiResponseDisplayModel();
+        jsonFile = e.File;
+        isSubmitDisabled = false;
+    }
+
+    private async void OnSubmit()
+    {
+        var stream = jsonFile.OpenReadStream();
+        var ms = new MemoryStream();
+        await stream.CopyToAsync(ms);
+
+        var uploadedFile = new UploadFileModel
+        {
+            FileName = jsonFile.Name,
+            FileContent = ms.ToArray()
+        };
+        ms.Close();
+        
+        var response = await Http.PostAsJsonAsync("municipalities/upload", uploadedFile);
+        content = await response.Content.ReadFromJsonAsync<ApiResponseDisplayModel>();
+        
+        StateHasChanged();
+    }
+}

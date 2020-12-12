@@ -186,7 +186,6 @@
               <e p="SeedData" t="Include">
                 <e p="municipalities.json" t="Include" />
                 <e p="schedules.json" t="Include" />
-                <e p="upload.json" t="Include" />
               </e>
               <e p="SpecificationEvaluator.cs" t="Include" />
               <e p="TaxManagerContext.cs" t="Include" />

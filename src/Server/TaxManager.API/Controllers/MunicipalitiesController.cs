@@ -10,7 +10,7 @@ using TaxManager.API.Errors;
 using TaxManager.Core.Entities;
 using TaxManager.Core.Interfaces;
 using TaxManager.Core.Specifications;
-using JsonSerializer = System.Text.Json.JsonSerializer;
+using System.Text.Json;
 
 namespace TaxManager.API.Controllers
 {

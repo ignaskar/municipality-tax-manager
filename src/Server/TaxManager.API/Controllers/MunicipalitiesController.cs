@@ -20,13 +20,11 @@ namespace TaxManager.API.Controllers
     {
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
-        private readonly ILogger<MunicipalitiesController> _logger;
 
-        public MunicipalitiesController(IUnitOfWork uow, IMapper mapper, ILogger<MunicipalitiesController> logger)
+        public MunicipalitiesController(IUnitOfWork uow, IMapper mapper)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _logger = logger;
         }
 
         [HttpGet]

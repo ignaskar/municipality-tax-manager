@@ -1,69 +1,76 @@
 @page "/FetchMunicipalities"
 @inject HttpClient Http
 
-
-<h3>Fetch Municipalities</h3>
-
-<div class="row">
-    <div class="@DivCssClass">
-        @if (municipalities == null)
-        {
-            <p><em>loading...</em></p>
-        }
-        else
-        {
-            <table class="table table-bordered">
-                <thead class="thead-light">
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>YearlyTaxRate</th>
-                    <th>MonthlyTaxRate</th>
-                    <th>WeeklyTaxRate</th>
-                    <th>DailyTaxRate</th>
-                    <th>TaxSchedules</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach (var m in municipalities)
-                {
+<div class="container-fluid">
+    <div class="row">
+        <div class="@DivCssClass">
+            <h3>Fetch Municipalities</h3>
+            @if (municipalities == null)
+            {
+                <p><em>loading...</em></p>
+            }
+            else
+            {
+                <table class="table table-bordered">
+                    <thead class="thead-light">
                     <tr>
-                        <th>@m.Id</th>
-                        <th>@m.Name</th>
-                        <th>@m.YearlyTaxRate</th>
-                        <th>@m.MonthlyTaxRate</th>
-                        <th>@m.WeeklyTaxRate</th>
-                        <th>@m.DailyTaxRate</th>
-                        <th>
-                            <button class="btn btn-primary" @onclick="() => AddSchedule(m.Id)">
-                                Add
-                            </button>
-                            <button class="btn btn-outline-secondary" @onclick="() => DisplaySchedule(m.Id)">
-                                Show
-                            </button>
-                        </th>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>YearlyTaxRate</th>
+                        <th>MonthlyTaxRate</th>
+                        <th>WeeklyTaxRate</th>
+                        <th>DailyTaxRate</th>
+                        <th>TaxSchedules</th>
                     </tr>
-                }
-                </tbody>
-            </table>
-        }
-    </div>
+                    </thead>
+                    <tbody>
+                    @foreach (var m in municipalities)
+                    {
+                        <tr>
+                            <th>@m.Id</th>
+                            <th>@m.Name</th>
+                            <th>@m.YearlyTaxRate</th>
+                            <th>@m.MonthlyTaxRate</th>
+                            <th>@m.WeeklyTaxRate</th>
+                            <th>@m.DailyTaxRate</th>
+                            <th>
+                                <button class="btn btn-primary" @onclick="() => AddSchedule(m.Id)">
+                                    Add
+                                </button>
+                                <button class="btn btn-outline-secondary" @onclick="() => DisplaySchedule(m.Id)">
+                                    Show
+                                </button>
+                            </th>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            }
+        </div>
         @if (showTaxSchedule)
         {
             <div class="col-md-4">
                 <ShowMunicipalityTaxSchedule MunicipalityId="@municipalityId" 
                                              OnClose="@HandleClose"
-                                             />
+                />
             </div>
         } else if (addTaxSchedule)
         {
             <div class="col-md-4">
                 <AddMunicipalityTaxSchedule MunicipalityId="@municipalityId"
                                             OnClose="@HandleClose"
-                                            />
+                />
             </div>
         }
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <GetTaxRateByDate Municipalities="@municipalities" />
+            
+        </div>
+    </div>
 </div>
+
 
 
 
@@ -75,6 +82,12 @@
     private bool addTaxSchedule;
     private string DivCssClass => (showTaxSchedule || addTaxSchedule) ? "col-md-8" : "col-md-12";
 
+    private int GetMunicipalityIdFromName(string name)
+    {
+        var municipality = municipalities.FirstOrDefault(x => string.Equals(x.Name, name, StringComparison.CurrentCultureIgnoreCase));
+        return municipality?.Id ?? 0;
+    }
+    
     private void DisplaySchedule(int id)
     {
         municipalityId = id;

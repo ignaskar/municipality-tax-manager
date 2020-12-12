@@ -16,11 +16,13 @@
             <e p="bin" t="ExcludeRecursive" />
             <e p="Components" t="Include">
               <e p="AddMunicipalityTaxSchedule.razor" t="Include" />
+              <e p="GetTaxRateByDate.razor" t="Include" />
               <e p="ShowMunicipalityTaxSchedule.razor" t="Include" />
             </e>
             <e p="Models" t="Include">
               <e p="ApiResponseDisplayModel.cs" t="Include" />
               <e p="MunicipalityDisplayModel.cs" t="Include" />
+              <e p="TaxRateLookupModel.cs" t="Include" />
               <e p="TaxScheduleDisplayModel.cs" t="Include" />
               <e p="UploadFileModel.cs" t="Include" />
             </e>

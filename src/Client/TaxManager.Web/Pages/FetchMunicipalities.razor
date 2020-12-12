@@ -1,0 +1,104 @@
+@page "/FetchMunicipalities"
+@inject HttpClient Http
+
+
+<h3>Fetch Municipalities</h3>
+
+<div class="row">
+    <div class="@DivCssClass">
+        @if (municipalities == null)
+        {
+            <h3>loading...</h3>
+        }
+        else
+        {
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>YearlyTaxRate</th>
+                    <th>MonthlyTaxRate</th>
+                    <th>WeeklyTaxRate</th>
+                    <th>DailyTaxRate</th>
+                    <th>TaxSchedules</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var m in municipalities)
+                {
+                    <tr>
+                        <th>@m.Id</th>
+                        <th>@m.Name</th>
+                        <th>@m.YearlyTaxRate</th>
+                        <th>@m.MonthlyTaxRate</th>
+                        <th>@m.WeeklyTaxRate</th>
+                        <th>@m.DailyTaxRate</th>
+                        <th>
+                            <button class="btn btn-primary" @onclick="() => AddSchedule(m.Id)">
+                                Add
+                            </button>
+                            <button class="btn btn-outline-secondary" @onclick="() => DisplaySchedule(m.Id)">
+                                Show
+                            </button>
+                        </th>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
+    </div>
+        @if (showTaxSchedule)
+        {
+            <div class="col-md-4">
+                <ShowMunicipalityTaxSchedule MunicipalityId="@municipalityId" 
+                                             OnClose="@HandleClose"
+                                             />
+            </div>
+        } else if (addTaxSchedule)
+        {
+            <div class="col-md-4">
+                <AddMunicipalityTaxSchedule MunicipalityId="@municipalityId"
+                                            OnClose="@HandleClose"
+                                            />
+            </div>
+        }
+</div>
+
+
+
+
+@code {
+    private MunicipalityDisplayModel[] municipalities;
+    private int municipalityId;
+    private bool showTaxSchedule;
+    private bool addTaxSchedule;
+    private string DivCssClass => (showTaxSchedule || addTaxSchedule) ? "col-md-8" : "col-md-12";
+
+    private void DisplaySchedule(int id)
+    {
+        municipalityId = id;
+        addTaxSchedule = false;
+        showTaxSchedule = true;
+    }
+
+    private void AddSchedule(int id)
+    {
+        municipalityId = id;
+        showTaxSchedule = false;
+        addTaxSchedule = true;
+    }
+
+    private async Task HandleClose()
+    {
+        showTaxSchedule = false;
+        addTaxSchedule = false;
+        municipalityId = 0;
+    }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        municipalities = await Http.GetFromJsonAsync<MunicipalityDisplayModel[]>("municipalities");
+    }
+
+}

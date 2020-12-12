@@ -61,6 +61,16 @@ namespace TaxManager.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "TaxManager.API", Version = "v1"});
             });
+
+            services.AddCors(o =>
+            {
+                o.AddPolicy("allowBlazor", builder =>
+                {
+                    builder.WithOrigins("https://localhost:5003", "https://localhost:5002")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,6 +86,8 @@ namespace TaxManager.API
 
             app.UseRouting();
 
+            app.UseCors("allowBlazor");
+            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });

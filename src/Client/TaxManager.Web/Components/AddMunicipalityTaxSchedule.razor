@@ -1,0 +1,72 @@
+@inject HttpClient Http
+
+<h3 class="@HeaderCssClass">@HeaderText</h3>
+
+<EditForm Model="@scheduleModel" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    
+    <div class="form-group">
+        <label>MunicipalityId</label>
+        <span>@MunicipalityId</span>
+    </div>
+    
+    <div class="form-group">
+        <label>StartDate</label>
+        <InputDate class="form-control" @bind-Value="@scheduleModel.StartDate"></InputDate>
+    </div>
+    
+    <div class="form-group">
+        <label>EndDate</label>
+        <InputDate  class="form-control" @bind-Value="@scheduleModel.EndDate"></InputDate>
+    </div>
+    
+    <div class="form-group">
+        <label>TaxType</label>
+        <InputSelect class="form-control" @bind-Value="@scheduleModel.TaxType">
+            <option value="">Select tax type based on range...</option>
+            <option value="Yearly">Yearly</option>
+            <option value="Monthly">Monthly</option>
+            <option value="Weekly">Weekly</option>
+            <option value="Daily">Daily</option>
+        </InputSelect>
+    </div>
+    
+    <button class="btn btn-primary" type="submit">Create</button>
+    <button class="btn btn-secondary" @onclick="@CloseForm">Close Without Saving</button>
+</EditForm>
+
+
+@code {
+    [Parameter]
+    public int MunicipalityId { get; set; }
+    
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+    public string HeaderText => successfulPost ? "Success!" : "AddMunicipalityTaxSchedule";
+    public string HeaderCssClass => successfulPost ? "text-success" : "";
+    
+    private TaxScheduleDisplayModel scheduleModel = new TaxScheduleDisplayModel();
+    private string content;
+    private bool successfulPost;
+     
+    private async Task CloseForm()
+    {
+        await OnClose.InvokeAsync();
+    }
+    
+    private async Task HandleValidSubmit()
+    {
+        successfulPost = true;
+        await Http.PostAsJsonAsync($"municipalities/{MunicipalityId}/taxschedules", scheduleModel);
+        await Task.Delay(1000);
+        await CloseForm();
+    }
+
+    protected override void OnParametersSet()
+    {
+        scheduleModel.MunicipalityId = MunicipalityId;
+    }
+
+}

@@ -1,0 +1,46 @@
+@inject HttpClient Http
+<h3>Tax Schedules for @MunicipalityId</h3>
+
+<table class="table table-bordered">
+    <thead class="thead-light">
+    <tr>
+        <th>Id</th>
+        <th>StartDate</th>
+        <th>EndDate</th>
+        <th>TaxType</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var s in taxSchedules)
+    {
+        <tr>
+            <th>@s.Id</th>
+            <th>@s.StartDate</th>
+            <th>@s.EndDate</th>
+            <th>@s.TaxType</th>
+        </tr>
+    }
+    </tbody>
+</table>
+<button class="btn btn-primary" @onclick="@CloseSchedule">Close</button>
+
+@code {
+    [Parameter]
+    public int MunicipalityId { get; set; }
+    
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+    private List<TaxScheduleDisplayModel> taxSchedules = new List<TaxScheduleDisplayModel>();
+
+    private async Task CloseSchedule()
+    {
+        await OnClose.InvokeAsync();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        taxSchedules = await Http.GetFromJsonAsync<List<TaxScheduleDisplayModel>>($"municipalities/{MunicipalityId}/taxschedules");
+    }
+
+}

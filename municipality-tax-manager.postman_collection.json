@@ -101,6 +101,56 @@
 					"response": []
 				},
 				{
+					"name": "GET Tax Rate By Date (Vilnius/May)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/v1/municipalities/1/taxschedules/GetTaxRate/2020-05-01",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"v1",
+								"municipalities",
+								"1",
+								"taxschedules",
+								"GetTaxRate",
+								"2020-05-01"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Tax Rate By Date (Vilnius/Jan)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/v1/municipalities/1/taxschedules/GetTaxRate/2020-01-01",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"v1",
+								"municipalities",
+								"1",
+								"taxschedules",
+								"GetTaxRate",
+								"2020-01-01"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "POST Municipality",
 					"request": {
 						"method": "POST",

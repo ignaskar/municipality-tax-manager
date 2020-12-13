@@ -109,6 +109,10 @@
               <e p="ApiResponse.cs" t="Include" />
               <e p="ApiValidationErrorResponse.cs" t="Include" />
             </e>
+            <e p="extensions" t="Include">
+              <e p="ApplicationServicesExtensions.cs" t="Include" />
+              <e p="SwaggerServicesExtensions.cs" t="Include" />
+            </e>
             <e p="Helpers" t="Include">
               <e p="DateRange.cs" t="Include" />
               <e p="TaxRateClarification.cs" t="Include" />

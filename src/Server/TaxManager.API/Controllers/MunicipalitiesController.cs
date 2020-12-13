@@ -11,6 +11,7 @@ using TaxManager.Core.Entities;
 using TaxManager.Core.Interfaces;
 using TaxManager.Core.Specifications;
 using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
 
 namespace TaxManager.API.Controllers
 {
@@ -72,25 +73,31 @@ namespace TaxManager.API.Controllers
         [HttpPost("upload", Name = "UploadMunicipalities")]
         public async Task<ActionResult> CreateMunicipalitiesFromJson(UploadFile file)
         {
-            var municipalitiesToAdd = DeserializeUploadedFile(file.FileContent);
-            
-            foreach (var municipality in municipalitiesToAdd)
+            try
             {
-                var municipalityEntity = _mapper.Map<Municipality>(municipality);
-                _uow.Repository<Municipality>().Add(municipalityEntity);
+                var municipalitiesToAdd = DeserializeUploadedFile(file.FileContent);
+                
+                foreach (var municipality in municipalitiesToAdd)
+                {
+                    var municipalityEntity = _mapper.Map<Municipality>(municipality);
+                    _uow.Repository<Municipality>().Add(municipalityEntity);
 
-                try
-                {
-                    await _uow.Complete();
+                    try
+                    {
+                        await _uow.Complete();
+                    }
+                    catch(DbUpdateException ex)
+                    {
+                        return new ObjectResult(new ApiResponse(400, "JSON file does not match the required template"));
+                    }
                 }
-                catch (Exception ex)
-                {
-                    return new ObjectResult(new ApiResponse(400,
-                        "Incorrectly formatted JSON file. Please verify the formatting before uploading and try again."));
-                }
+
+                return Ok(new ApiResponse(201, $"Successfully created {municipalitiesToAdd.Count} entries"));
             }
-
-            return Ok(new ApiResponse(201, $"Successfully created {municipalitiesToAdd.Count} entries"));
+            catch (Exception ex)
+            {
+                return new ObjectResult(new ApiResponse(400, "JSON file cannot be parsed"));
+            }
         }
 
         private static IReadOnlyList<MunicipalityForCreationDto> DeserializeUploadedFile(byte[] buffer)

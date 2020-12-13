@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using TaxManager.API.Errors;
+using TaxManager.API.Extensions;
 using TaxManager.API.Middleware;
 using TaxManager.Core.Interfaces;
 using TaxManager.Infra.Data;
@@ -29,39 +30,14 @@ namespace TaxManager.API
         {
             services.AddControllers();
 
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            services.Configure<ApiBehaviorOptions>(o =>
-            {
-                o.InvalidModelStateResponseFactory = context =>
-                {
-                    var errors = context.ModelState
-                        .Where(e => e.Value.Errors.Count > 0)
-                        .SelectMany(x => x.Value.Errors)
-                        .Select(x => x.ErrorMessage).ToArray();
-
-                    var errorResponse = new ApiValidationErrorResponse
-                    {
-                        Errors = errors
-                    };
-
-                    return new BadRequestObjectResult(errorResponse);
-                };
-            });
+            services.RegisterApplicationServices();
+            services.RegisterSwaggerServices();
             
             services.AddDbContext<TaxManagerContext>(o =>
             {
                 o.UseSqlServer(Configuration.GetConnectionString("SQLDB"));
             });
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "TaxManager.API", Version = "v1"});
-            });
-
+            
             services.AddCors(o =>
             {
                 o.AddPolicy("allowBlazor", builder =>
@@ -78,9 +54,8 @@ namespace TaxManager.API
         {
             app.UseMiddleware<ExceptionMiddleware>();
             app.UseStatusCodePagesWithReExecute("/api/v1/errors/{0}");
-            
-            app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TaxManager.API v1"));
+
+            app.UseSwaggerServices();
             
             app.UseHttpsRedirection();
 

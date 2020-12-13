@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+
+  taxmanagerdb:
+    image: mcr.microsoft.com/mssql/server
+
+  taxmanager.api:
+    image: ${DOCKER_REGISTRY-}taxmanagerapi
+    build:
+      context: .
+      dockerfile: src/Server/TaxManager.API/Dockerfile

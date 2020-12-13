@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  taxmanagerdb:
+    container_name: taxmanagerdb
+    restart: always
+    volumes:
+      - ${WEBAPP_STORAGE_HOME}/site:/data/db
+    environment:
+      SA_PASSWORD: "5%%F!@@D67^"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+
+  taxmanager.api:
+    container_name: taxmanagerapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:SQLDB=Server=taxmanagerdb,1433;Database=MunicipalityManager;User Id=sa;Password=5%%F!@@D67^;"
+    depends_on:
+      - taxmanagerdb
+    ports:
+      - "8000:80"
+    volumes:
+      - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets
+      - ${HOME}/.aspnet/https:/root/.aspnet/https/

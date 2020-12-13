@@ -29,6 +29,7 @@ namespace TaxManager.API.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IReadOnlyList<MunicipalityDto>>> GetAllMunicipalities(
             [FromQuery] MunicipalitySpecParams parameters)
         {

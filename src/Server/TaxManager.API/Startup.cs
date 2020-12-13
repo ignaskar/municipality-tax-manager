@@ -56,8 +56,6 @@ namespace TaxManager.API
             app.UseStatusCodePagesWithReExecute("/api/v1/errors/{0}");
 
             app.UseSwaggerServices();
-            
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 
